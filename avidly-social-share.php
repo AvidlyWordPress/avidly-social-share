@@ -13,6 +13,8 @@
  * @package           Avidly_Social_Share
  */
 
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -20,15 +22,6 @@
  *
  * @see https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/writing-your-first-block-type/
  */
-// function create_block_avidly_social_share_block_init() {
-// register_block_type( __DIR__ );
-// }
-// add_action( 'init', 'create_block_avidly_social_share_block_init' );
-
-
-defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
-
-
 add_action(
 	'init',
 	function() {
@@ -243,18 +236,3 @@ function avidly_social_share_checkbox_callback( $social_id = '' ) {
 	// Output input field.
 	echo $html;
 }
-
-/**
- * Whitelist block from plugin.
- */
-/*
-add_action(
-	'allowed_block_types',
-	function( $allowed_block_types, $post ) {
-		$allowed_block_types[] = 'avidly/social-share';
-		return $allowed_block_types;
-	},
-	11,
-	2
-);
-*/

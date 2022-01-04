@@ -75,7 +75,7 @@ function avidly_social_share_callback( $attributes ) {
 		'<div%s%s>%s</div>',
 		( $class ) ? ' class="' . esc_attr( $class ) . '"' : '',
 		( $style ) ? ' style="' . esc_attr( $style ) . '"' : '',
-		avidly_social_share( 'avidly-social-share-template.php' )
+		avidly_get_social_share( 'avidly-social-share-template.php' )
 	);
 }
 
@@ -162,7 +162,13 @@ add_filter(
 * Output (based on https://10up.github.io/wp-component-library/component/social-links/index.html).
 * Use OB to render the HTL output as string.
 */
-function avidly_social_share( $file_name ) {
+function avidly_get_social_share( $file_name = 'avidly-social-share-template.php' ) {
+
+	// Check if there is atleast default value added to filename.
+	if ( ! $file_name ) {
+		return;
+	}
+
 	ob_start();
 	include plugin_dir_path( __FILE__ ) . $file_name;
 	$content = ob_get_contents();

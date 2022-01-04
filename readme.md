@@ -9,8 +9,8 @@ A WordPress pluging to add social share buttons to your WordPress theme or page/
 ## Usage
 Add social share icons to you theme
 ```sh
-if ( function_exists( 'avidly_social_share' ) ) {
-	avidly_social_share();
+if ( function_exists( 'avidly_get_social_share' ) ) {
+	echo avidly_get_social_share();
 }
 ```
 

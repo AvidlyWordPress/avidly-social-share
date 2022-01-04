@@ -12,7 +12,7 @@ $string = '';
 
 foreach ( $medias as $key => $value ) {
 	$string .= sprintf(
-		'<li class="social-share__item share--%s w2"><a href="%s" aria-label="%s %s" %s>%s</a></li>',
+		'<li class="social-share__item share--%s"><a href="%s" aria-label="%s %s" %s>%s</a></li>',
 		esc_attr( $key ),
 		esc_html( $value['url'] ),
 		esc_html_x( 'Share in', 'social share UI', 'avidly-social-share' ),
@@ -23,12 +23,8 @@ foreach ( $medias as $key => $value ) {
 }
 ?>
 
-<div class="social-media social__inner-container">
-	<div class="social-media-container alignwide flex items-start items-center@md">
+<ul class="social-share list-none flex">
+	<?php echo $string; ?>
+</ul>
 
-		<ul class="social-share margin-top-xs margin-top-xxxxs@md flex@md flex-wrap gap-md reset-list-style">
-			<?php echo $string; ?>
-		</ul>
 
-	</div>
-</div><!-- /.social-media -->

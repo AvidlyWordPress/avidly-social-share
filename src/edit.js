@@ -29,10 +29,14 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
+import ServerSideRender from '@wordpress/server-side-render';
+
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'Social Share icons.', 'avidly-social-share' ) }
+			<ServerSideRender
+              block = 'avidly/social-share'
+            />
 		</p>
 	);
 }

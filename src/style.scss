@@ -2,45 +2,15 @@
  * The following styles get applied both on the front of your site
  * and in the editor.
  */
-
-.wp-block-create-block-avidly-social-share {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
-}
-
-.social-media{
-	width: auto!important;
-	
-	.social-share{
-		position: fixed;
-		left:0.5rem;
-		list-style:none;
-
-		.social-share__item{
-			width:1.5rem;
-			margin-right: 1rem;
-			
-			a{
-				
-				&:active{
-					background:transparent!important;
-				}
-
-				&:hover svg{
-					fill: rgba( #000000, 0.6 );
-				}
-			}
-		}
+.social-share {
+	a {
+		color: inherit;
 	}
-}
-
-.avidly-social-share-block{
-
-	.social-share{
-		position: relative;
-		display: inline-flex;
-		margin:0;
-		left:0;
+	ul {
+		margin-left: -0.25rem;
+		margin-right: -0.25rem;
+	}
+	&__item {
+		padding: 0.25rem;
 	}
 }

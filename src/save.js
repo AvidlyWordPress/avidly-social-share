@@ -23,12 +23,5 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save() {
-	return (
-		<p { ...useBlockProps.save() }>
-			{ __(
-				'Avidly Social Share – hello from the saved content!',
-				'avidly-social-share'
-			) }
-		</p>
-	);
+	return null;
 }

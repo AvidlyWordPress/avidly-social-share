@@ -33,10 +33,10 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 export default function Edit() {
 	return (
-		<p { ...useBlockProps() }>
+		<div { ...useBlockProps() }>
 			<ServerSideRender
               block = 'avidly/social-share'
             />
-		</p>
+		</div>
 	);
 }

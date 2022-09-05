@@ -4,7 +4,7 @@
  * Description:       Add social share buttons to your page. <a href='/wp-admin/options-general.php?page=avidly_social_share_plugin'>Settings.</a>
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            Avidly
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

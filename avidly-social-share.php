@@ -95,9 +95,21 @@ add_action(
  */
 function avidly_set_social_medias() {
 
-	$post_id   = ( is_home() ) ? get_option( 'page_for_posts' ) : get_the_ID(); // Use current post ID.
-	$title_raw = rawurlencode( esc_attr( get_the_title( $post_id ) ) );
-	$link      = get_the_permalink( $post_id );
+	// Detect correct share content for page for posts, term archives and single content (example posts and pages).
+	if ( is_home() ) {
+		$post_id   = get_option( 'page_for_posts' );
+		$title_raw = rawurlencode( esc_attr( get_option( 'blogname' ) . ' | ' . get_the_title( $post_id ) ) );
+		$link      = get_the_permalink( $post_id );
+	} elseif ( is_archive() ) {
+		global $wp_query;
+		$cat_obj   = $wp_query->get_queried_object();
+		$title_raw = rawurlencode( get_option( 'blogname' ) . ' | ' . esc_attr( $cat_obj->name ) );
+		$link      = get_term_link( $cat_obj->term_id );
+	} else {
+		$post_id   = get_the_ID();
+		$title_raw = rawurlencode( esc_attr( get_the_title( $post_id ) ) );
+		$link      = get_the_permalink( $post_id );
+	}
 
 	$medias = array(
 		'facebook' => array(

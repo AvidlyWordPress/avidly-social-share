@@ -56,20 +56,8 @@ function avidly_social_share_callback( $attributes ) {
 	$class .= ( isset( $attributes['textColor'] ) ) ? ' has-' . $attributes['textColor'] . '-color' : '';
 	$class .= ( isset( $attributes['align'] ) ) ? ' align' . $attributes['align'] : '';
 	$class .= ( isset( $attributes['className'] ) ) ? ' ' . $attributes['className'] : '';
-	
-	$style = '';
 
-	if ( isset( $attributes['style'] ) && is_array( $attributes['style'] ) ) {
-		$padding = '';
-
-		foreach ( $attributes['style'] as $key => $val ) {
-			if ( 'spacing' === $key ) {
-				$padding = 'padding: ' . implode( ' ', $val['padding'] );
-			}
-		}
-
-		$style .= ( $padding ) ? esc_attr( $padding ) : '';
-	}
+	$style = avidly_social_share_block_inlinestyles( $attributes, 'string' );
 
 	return sprintf(
 		'<div%s%s>%s</div>',
@@ -77,6 +65,60 @@ function avidly_social_share_callback( $attributes ) {
 		( $style ) ? ' style="' . esc_attr( $style ) . '"' : '',
 		avidly_get_social_share( 'avidly-social-share-template.php' )
 	);
+}
+
+/**
+ * Create block inline styles for PHP render.
+ *
+ * @param array  $attributes The block attributes.
+ * @param string $format return results in array/string (default: array).
+ *
+ * @return array $inline_style.
+ */
+function avidly_social_share_block_inlinestyles( $attributes, $format = 'array' ) {
+	// Init array.
+	$inline_style = array();
+	
+	// Return if we do not have styles.
+	if ( ! isset( $attributes['style'] ) || ! is_array( $attributes['style'] ) ) {
+		return false;
+	}
+
+	// Handle spacing styles (mainly margins and paddings, possibilty that there could be some others in future).
+	$spacings = isset( $attributes['style']['spacing'] ) ? $attributes['style']['spacing'] : array(); // use empty array as fallback.
+
+	foreach( $spacings as $style => $values ) {
+		// Skip values that are not array (example blockGap).
+		if( ! is_array( $values ) ) {
+			continue;
+		}
+
+		foreach( $values as $pos => $val ) {
+			$css_var_val = '';
+
+			// Use strpos to detect if value is CSS variable or manually set.
+			if ( false !== strpos( $val, 'var' ) ) {
+				$css_var = explode( ':', $val ); // Explode the var from value.
+				$css_var_val = ( isset( $css_var[1] ) ) ? str_replace( '|', '--', $css_var[1]) : 'unset'; // Format the CSS variable value.
+			}
+
+			// Build single CSS rule.
+			$inline_style[] = sprintf(
+				'%s-%s:%s',
+				esc_attr( $style ),
+				esc_attr( $pos ),
+				( $css_var_val ) ? 'var(--wp--' . esc_attr( $css_var_val ) . ')' : esc_attr( $val )
+			);
+		}
+	}
+
+	// Handle format how results will be return.
+	if ( 'string' === $format ) {
+		$inline_style = ( is_array( $inline_style ) ) ? implode( ';', $inline_style  ) : ''; // Convert to string.
+		return $inline_style;
+	} else {
+		return $inline_style;
+	}
 }
 
 

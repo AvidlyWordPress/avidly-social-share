@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "avidly/social-share",
-	"version": "0.1.0",
+	"version": "1.2.1",
 	"title": "Avidly Social Share",
 	"category": "widgets",
 	"icon": "share",
